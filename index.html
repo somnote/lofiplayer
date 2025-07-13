@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>SOMLUTION LOFI PLAYER</title>
+  <style>
+    body {
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .cassette-player {
+      position: relative;
+      width: 600px;
+      height: 350px;
+    }
+    .tape {
+      width: 100%;
+      display: block;
+    }
+    .reel {
+      position: absolute;
+      pointer-events: auto;
+      width: 331px;
+      cursor: pointer;
+      transition: filter 0.2s;
+      top: 159px;
+      left: 134px;
+    }
+    .reel:hover {
+      filter: brightness(0.85);
+    }
+    .reel:active {
+      filter: brightness(0.85);
+    }
+    .reel.clicked {
+      filter: brightness(0.85);
+    }
+  </style>
+</head>
+<body>
+  <div class="cassette-player">
+    <img src="tape.png" alt="tape" class="tape">
+    <img src="reel.png" class="reel" id="reel">
+    <audio id="audio" src="somlution-lofi.mp3"></audio>
+  </div>
+  <script>
+    const reel = document.getElementById('reel');
+    const audio = document.getElementById('audio');
+
+    // 릴 클릭 시 음악 재생/일시정지 토글
+    function togglePlay() {
+      // 클릭 효과 추가
+      reel.classList.add('clicked');
+      setTimeout(() => {
+        reel.classList.remove('clicked');
+      }, 200);
+
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+    reel.addEventListener('click', togglePlay);
+
+    // 음악이 끝나면 자동으로 다시 재생
+    audio.addEventListener('ended', () => {
+      audio.play();
+    });
+  </script>
+</body>
+</html>
+
