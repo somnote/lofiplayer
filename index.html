@@ -15,56 +15,36 @@
       position: relative;
       width: 600px;
       height: 350px;
+      max-width: 100%;
+      max-height: 100vh;
+      display: inline-block;
     }
     .tape {
       width: 100%;
+      height: auto;
       display: block;
-    }
-    .reel {
-      position: absolute;
-      pointer-events: auto;
-      width: 331px;
       cursor: pointer;
-      transition: filter 0.2s;
-      top: 159px;
-      left: 134px;
-    }
-    .reel:hover {
-      filter: brightness(0.85);
-    }
-    .reel:active {
-      filter: brightness(0.85);
-    }
-    .reel.clicked {
-      filter: brightness(0.85);
     }
   </style>
 </head>
 <body>
   <div class="cassette-player">
-    <img src="tape.png" alt="tape" class="tape">
-    <img src="reel.png" class="reel" id="reel">
+    <img src="tape.png" alt="tape" class="tape" id="tape">
     <audio id="audio" src="somlution-lofi.mp3"></audio>
   </div>
   <script>
-    const reel = document.getElementById('reel');
+    const tape = document.getElementById('tape');
     const audio = document.getElementById('audio');
 
-    // 릴 클릭 시 음악 재생/일시정지 토글
+    // 테이프 클릭 시 음악 재생/일시정지 토글
     function togglePlay() {
-      // 클릭 효과 추가
-      reel.classList.add('clicked');
-      setTimeout(() => {
-        reel.classList.remove('clicked');
-      }, 200);
-
       if (audio.paused) {
         audio.play();
       } else {
         audio.pause();
       }
     }
-    reel.addEventListener('click', togglePlay);
+    tape.addEventListener('click', togglePlay);
 
     // 음악이 끝나면 자동으로 다시 재생
     audio.addEventListener('ended', () => {
